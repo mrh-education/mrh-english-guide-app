@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2457c5">
+  <title>MRH English Guide</title>
+  <style>
+    :root { --blue:#2457c5; --pale:#eef3ff; --ink:#172033; --muted:#657089; --green:#16834b; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif; background:#f5f7fc; color:var(--ink); }
+    header { background:linear-gradient(135deg,#173b91,#3478e5); color:white; padding:28px 18px 24px; }
+    header h1 { margin:0 0 7px; font-size:26px; }
+    header p { margin:0; opacity:.92; }
+    main { max-width:760px; margin:0 auto; padding:16px; }
+    .tabs { display:flex; gap:8px; overflow:auto; padding:4px 0 14px; }
+    .tab { border:0; border-radius:999px; padding:10px 15px; background:#e5eaf5; color:#26334e; font-weight:650; white-space:nowrap; }
+    .tab.active { background:var(--blue); color:white; }
+    .panel,.card { background:white; border-radius:16px; padding:18px; box-shadow:0 3px 14px #1a2b5010; margin-bottom:14px; }
+    h2 { font-size:20px; margin:0 0 12px; }
+    h3 { margin:0 0 6px; font-size:17px; }
+    p { line-height:1.55; }
+    .muted { color:var(--muted); }
+    .word { display:flex; justify-content:space-between; gap:12px; align-items:center; padding:12px 0; border-bottom:1px solid #edf0f6; }
+    .word:last-child { border:0; }
+    .meaning { color:var(--muted); font-size:14px; margin-top:3px; }
+    button.action { background:var(--blue); color:white; border:0; border-radius:10px; padding:11px 15px; font-weight:650; cursor:pointer; }
+    button.secondary { background:var(--pale); color:var(--blue); }
+    .question { font-weight:700; font-size:18px; margin:12px 0; }
+    .option { display:block; width:100%; text-align:left; margin:8px 0; padding:12px; border:1px solid #dce2ee; background:white; border-radius:10px; color:var(--ink); }
+    .option:focus,.option:hover { border-color:var(--blue); background:var(--pale); }
+    #feedback { min-height:26px; font-weight:650; margin:10px 0; }
+    .good { color:var(--green); } .bad { color:#b42318; }
+    .hidden { display:none; }
+    footer { text-align:center; color:var(--muted); font-size:13px; padding:12px 0 30px; }
+    input { width:100%; padding:12px; border:1px solid #dce2ee; border-radius:10px; font:inherit; margin:8px 0 12px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MRH English Guide</h1>
+    <p>Learn English step by step — words, grammar and practice.</p>
+  </header>
+  <main>
+    <nav class="tabs" aria-label="Sections">
+      <button class="tab active" data-tab="home">Home</button>
+      <button class="tab" data-tab="words">Vocabulary</button>
+      <button class="tab" data-tab="grammar">Grammar</button>
+      <button class="tab" data-tab="quiz">Practice quiz</button>
+    </nav>
+
+    <section id="home" class="section">
+      <div class="panel">
+        <h2>Welcome!</h2>
+        <p>This is your English learning space. Start with a few useful words, read a simple grammar lesson, and test yourself with the quiz.</p>
+        <button class="action" onclick="showTab('words')">Start learning</button>
+      </div>
+      <div class="card">
+        <h3>Today's learning plan</h3>
+        <p>1. Learn five new words.</p>
+        <p>2. Read the lesson about am, is and are.</p>
+        <p>3. Answer the practice questions.</p>
+      </div>
+    </section>
+
+    <section id="words" class="section hidden">
+      <div class="panel">
+        <h2>Useful English words</h2>
+        <p class="muted">Read the word and its simple meaning.</p>
+        <div class="word"><div><strong>Beautiful</strong><div class="meaning">Pleasing to look at — সুন্দর</div></div><button class="action secondary" onclick="speak('Beautiful')">🔊</button></div>
+        <div class="word"><div><strong>Brave</strong><div class="meaning">Not afraid — সাহসী</div></div><button class="action secondary" onclick="speak('Brave')">🔊</button></div>
+        <div class="word"><div><strong>Honest</strong><div class="meaning">Truthful — সৎ</div></div><button class="action secondary" onclick="speak('Honest')">🔊</button></div>
+        <div class="word"><div><strong>Improve</strong><div class="meaning">To become better — উন্নতি করা</div></div><button class="action secondary" onclick="speak('Improve')">🔊</button></div>
+        <div class="word"><div><strong>Curious</strong><div class="meaning">Wanting to know — কৌতূহলী</div></div><button class="action secondary" onclick="speak('Curious')">🔊</button></div>
+      </div>
+    </section>
+
+    <section id="grammar" class="section hidden">
+      <div class="panel">
+        <h2>Grammar: Am, Is and Are</h2>
+        <p>Use <strong>am</strong> with <strong>I</strong>.</p>
+        <p>Example: I am a student.</p>
+        <p>Use <strong>is</strong> with <strong>he, she, it</strong> and one person's name.</p>
+        <p>Example: She is happy. / Rahim is kind.</p>
+        <p>Use <strong>are</strong> with <strong>you, we, they</strong> and plural nouns.</p>
+        <p>Example: They are friends. / You are welcome.</p>
+        <div class="card" style="background:#eef3ff">
+          <strong>Remember:</strong> I am · He/She/It is · You/We/They are
+        </div>
+      </div>
+    </section>
+
+    <section id="quiz" class="section hidden">
+      <div class="panel">
+        <h2>Practice quiz</h2>
+        <p class="muted" id="progress">Question 1 of 5</p>
+        <div class="question" id="question">I ___ a student.</div>
+        <div id="options"></div>
+        <div id="feedback" aria-live="polite"></div>
+        <button class="action" id="next" onclick="nextQuestion()" disabled>Next question</button>
+        <p id="score" class="good"></p>
+      </div>
+    </section>
+    <footer>Made for learning • MRH English Guide</footer>
+  </main>
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    function showTab(id) {
+      document.querySelectorAll('.section').forEach(s => s.classList.toggle('hidden', s.id !== id));
+      tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === id));
+    }
+    tabs.forEach(t => t.addEventListener('click', () => showTab(t.dataset.tab)));
+    function speak(word) {
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(word);
+        utterance.lang = 'en-US';
+        speechSynthesis.speak(utterance);
+      } else alert('Speech is not supported by this browser.');
+    }
+    const questions = [
+      {q:'I ___ a student.', a:['is','am','are'], correct:'am'},
+      {q:'She ___ my friend.', a:['are','am','is'], correct:'is'},
+      {q:'They ___ happy.', a:['is','are','am'], correct:'are'},
+      {q:'Rahim ___ a good boy.', a:['are','is','am'], correct:'is'},
+      {q:'You ___ welcome.', a:['am','is','are'], correct:'are'}
+    ];
+    let current = 0, points = 0, answered = false;
+    function renderQuestion() {
+      answered = false;
+      const item = questions[current];
+      document.getElementById('progress').textContent = `Question ${current+1} of ${questions.length}`;
+      document.getElementById('question').textContent = item.q;
+      document.getElementById('feedback').textContent = '';
+      document.getElementById('score').textContent = '';
+      document.getElementById('next').disabled = true;
+      document.getElementById('next').textContent = current === questions.length-1 ? 'See result' : 'Next question';
+      const holder = document.getElementById('options');
+      holder.innerHTML = '';
+      item.a.forEach(answer => {
+        const b = document.createElement('button');
+        b.className = 'option'; b.textContent = answer;
+        b.onclick = () => choose(answer, b);
+        holder.appendChild(b);
+      });
+    }
+    function choose(answer, button) {
+      if (answered) return;
+      answered = true;
+      const correct = questions[current].correct;
+      if (answer === correct) {
+        points++;
+        document.getElementById('feedback').textContent = 'Correct! Well done.';
+        document.getElementById('feedback').className = 'good';
+      } else {
+        document.getElementById('feedback').textContent = `Not quite. The correct answer is "${correct}".`;
+        document.getElementById('feedback').className = 'bad';
+      }
+      document.querySelectorAll('.option').forEach(b => b.disabled = true);
+      document.getElementById('next').disabled = false;
+    }
+    function nextQuestion() {
+      if (current < questions.length-1) { current++; renderQuestion(); }
+      else {
+        document.getElementById('question').textContent = 'Quiz complete!';
+        document.getElementById('options').innerHTML = '';
+        document.getElementById('feedback').textContent = '';
+        document.getElementById('score').textContent = `Your score: ${points} out of ${questions.length}`;
+        document.getElementById('next').textContent = 'Try again';
+        document.getElementById('next').disabled = false;
+        document.getElementById('next').onclick = () => {
+          current = 0; points = 0;
+          document.getElementById('next').onclick = nextQuestion;
+          renderQuestion();
+        };
+      }
+    }
+    renderQuestion();
+  </script>
+</body>
+</html>
