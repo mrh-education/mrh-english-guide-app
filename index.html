@@ -1,180 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#2457c5">
-  <title>MRH English Guide</title>
-  <style>
-    :root { --blue:#2457c5; --pale:#eef3ff; --ink:#172033; --muted:#657089; --green:#16834b; }
-    * { box-sizing:border-box; }
-    body { margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif; background:#f5f7fc; color:var(--ink); }
-    header { background:linear-gradient(135deg,#173b91,#3478e5); color:white; padding:28px 18px 24px; }
-    header h1 { margin:0 0 7px; font-size:26px; }
-    header p { margin:0; opacity:.92; }
-    main { max-width:760px; margin:0 auto; padding:16px; }
-    .tabs { display:flex; gap:8px; overflow:auto; padding:4px 0 14px; }
-    .tab { border:0; border-radius:999px; padding:10px 15px; background:#e5eaf5; color:#26334e; font-weight:650; white-space:nowrap; }
-    .tab.active { background:var(--blue); color:white; }
-    .panel,.card { background:white; border-radius:16px; padding:18px; box-shadow:0 3px 14px #1a2b5010; margin-bottom:14px; }
-    h2 { font-size:20px; margin:0 0 12px; }
-    h3 { margin:0 0 6px; font-size:17px; }
-    p { line-height:1.55; }
-    .muted { color:var(--muted); }
-    .word { display:flex; justify-content:space-between; gap:12px; align-items:center; padding:12px 0; border-bottom:1px solid #edf0f6; }
-    .word:last-child { border:0; }
-    .meaning { color:var(--muted); font-size:14px; margin-top:3px; }
-    button.action { background:var(--blue); color:white; border:0; border-radius:10px; padding:11px 15px; font-weight:650; cursor:pointer; }
-    button.secondary { background:var(--pale); color:var(--blue); }
-    .question { font-weight:700; font-size:18px; margin:12px 0; }
-    .option { display:block; width:100%; text-align:left; margin:8px 0; padding:12px; border:1px solid #dce2ee; background:white; border-radius:10px; color:var(--ink); }
-    .option:focus,.option:hover { border-color:var(--blue); background:var(--pale); }
-    #feedback { min-height:26px; font-weight:650; margin:10px 0; }
-    .good { color:var(--green); } .bad { color:#b42318; }
-    .hidden { display:none; }
-    footer { text-align:center; color:var(--muted); font-size:13px; padding:12px 0 30px; }
-    input { width:100%; padding:12px; border:1px solid #dce2ee; border-radius:10px; font:inherit; margin:8px 0 12px; }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>MRH English Guide</h1>
-    <p>Learn English step by step — words, grammar and practice.</p>
-  </header>
-  <main>
-    <nav class="tabs" aria-label="Sections">
-      <button class="tab active" data-tab="home">Home</button>
-      <button class="tab" data-tab="words">Vocabulary</button>
-      <button class="tab" data-tab="grammar">Grammar</button>
-      <button class="tab" data-tab="quiz">Practice quiz</button>
-    </nav>
-
-    <section id="home" class="section">
-      <div class="panel">
-        <h2>Welcome!</h2>
-        <p>This is your English learning space. Start with a few useful words, read a simple grammar lesson, and test yourself with the quiz.</p>
-        <button class="action" onclick="showTab('words')">Start learning</button>
-      </div>
-      <div class="card">
-        <h3>Today's learning plan</h3>
-        <p>1. Learn five new words.</p>
-        <p>2. Read the lesson about am, is and are.</p>
-        <p>3. Answer the practice questions.</p>
-      </div>
-    </section>
-
-    <section id="words" class="section hidden">
-      <div class="panel">
-        <h2>Useful English words</h2>
-        <p class="muted">Read the word and its simple meaning.</p>
-        <div class="word"><div><strong>Beautiful</strong><div class="meaning">Pleasing to look at — সুন্দর</div></div><button class="action secondary" onclick="speak('Beautiful')">🔊</button></div>
-        <div class="word"><div><strong>Brave</strong><div class="meaning">Not afraid — সাহসী</div></div><button class="action secondary" onclick="speak('Brave')">🔊</button></div>
-        <div class="word"><div><strong>Honest</strong><div class="meaning">Truthful — সৎ</div></div><button class="action secondary" onclick="speak('Honest')">🔊</button></div>
-        <div class="word"><div><strong>Improve</strong><div class="meaning">To become better — উন্নতি করা</div></div><button class="action secondary" onclick="speak('Improve')">🔊</button></div>
-        <div class="word"><div><strong>Curious</strong><div class="meaning">Wanting to know — কৌতূহলী</div></div><button class="action secondary" onclick="speak('Curious')">🔊</button></div>
-      </div>
-    </section>
-
-    <section id="grammar" class="section hidden">
-      <div class="panel">
-        <h2>Grammar: Am, Is and Are</h2>
-        <p>Use <strong>am</strong> with <strong>I</strong>.</p>
-        <p>Example: I am a student.</p>
-        <p>Use <strong>is</strong> with <strong>he, she, it</strong> and one person's name.</p>
-        <p>Example: She is happy. / Rahim is kind.</p>
-        <p>Use <strong>are</strong> with <strong>you, we, they</strong> and plural nouns.</p>
-        <p>Example: They are friends. / You are welcome.</p>
-        <div class="card" style="background:#eef3ff">
-          <strong>Remember:</strong> I am · He/She/It is · You/We/They are
-        </div>
-      </div>
-    </section>
-
-    <section id="quiz" class="section hidden">
-      <div class="panel">
-        <h2>Practice quiz</h2>
-        <p class="muted" id="progress">Question 1 of 5</p>
-        <div class="question" id="question">I ___ a student.</div>
-        <div id="options"></div>
-        <div id="feedback" aria-live="polite"></div>
-        <button class="action" id="next" onclick="nextQuestion()" disabled>Next question</button>
-        <p id="score" class="good"></p>
-      </div>
-    </section>
-    <footer>Made for learning • MRH English Guide</footer>
-  </main>
-  <script>
-    const tabs = document.querySelectorAll('.tab');
-    function showTab(id) {
-      document.querySelectorAll('.section').forEach(s => s.classList.toggle('hidden', s.id !== id));
-      tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === id));
-    }
-    tabs.forEach(t => t.addEventListener('click', () => showTab(t.dataset.tab)));
-    function speak(word) {
-      if ('speechSynthesis' in window) {
-        const utterance = new SpeechSynthesisUtterance(word);
-        utterance.lang = 'en-US';
-        speechSynthesis.speak(utterance);
-      } else alert('Speech is not supported by this browser.');
-    }
-    const questions = [
-      {q:'I ___ a student.', a:['is','am','are'], correct:'am'},
-      {q:'She ___ my friend.', a:['are','am','is'], correct:'is'},
-      {q:'They ___ happy.', a:['is','are','am'], correct:'are'},
-      {q:'Rahim ___ a good boy.', a:['are','is','am'], correct:'is'},
-      {q:'You ___ welcome.', a:['am','is','are'], correct:'are'}
-    ];
-    let current = 0, points = 0, answered = false;
-    function renderQuestion() {
-      answered = false;
-      const item = questions[current];
-      document.getElementById('progress').textContent = `Question ${current+1} of ${questions.length}`;
-      document.getElementById('question').textContent = item.q;
-      document.getElementById('feedback').textContent = '';
-      document.getElementById('score').textContent = '';
-      document.getElementById('next').disabled = true;
-      document.getElementById('next').textContent = current === questions.length-1 ? 'See result' : 'Next question';
-      const holder = document.getElementById('options');
-      holder.innerHTML = '';
-      item.a.forEach(answer => {
-        const b = document.createElement('button');
-        b.className = 'option'; b.textContent = answer;
-        b.onclick = () => choose(answer, b);
-        holder.appendChild(b);
-      });
-    }
-    function choose(answer, button) {
-      if (answered) return;
-      answered = true;
-      const correct = questions[current].correct;
-      if (answer === correct) {
-        points++;
-        document.getElementById('feedback').textContent = 'Correct! Well done.';
-        document.getElementById('feedback').className = 'good';
-      } else {
-        document.getElementById('feedback').textContent = `Not quite. The correct answer is "${correct}".`;
-        document.getElementById('feedback').className = 'bad';
-      }
-      document.querySelectorAll('.option').forEach(b => b.disabled = true);
-      document.getElementById('next').disabled = false;
-    }
-    function nextQuestion() {
-      if (current < questions.length-1) { current++; renderQuestion(); }
-      else {
-        document.getElementById('question').textContent = 'Quiz complete!';
-        document.getElementById('options').innerHTML = '';
-        document.getElementById('feedback').textContent = '';
-        document.getElementById('score').textContent = `Your score: ${points} out of ${questions.length}`;
-        document.getElementById('next').textContent = 'Try again';
-        document.getElementById('next').disabled = false;
-        document.getElementById('next').onclick = () => {
-          current = 0; points = 0;
-          document.getElementById('next').onclick = nextQuestion;
-          renderQuestion();
-        };
-      }
-    }
-    renderQuestion();
-  </script>
-</body>
-</html>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#173b91"><title>MRH English Guide</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f6fc;color:#172033;font:16px system-ui,sans-serif}header{background:linear-gradient(130deg,#173b91,#3478e5);color:white;padding:24px 17px}header h1{margin:0 0 5px;font-size:25px}main{max-width:820px;margin:auto;padding:14px}.tabs{display:flex;gap:7px;overflow:auto;padding:5px 0 14px}.tab,button{border:0;border-radius:10px;padding:10px 13px;font:inherit;font-weight:600;cursor:pointer}.tab{white-space:nowrap;background:#e4eaf5;color:#26334e}.tab.active,.primary{background:#2457c5;color:white}.panel,.card{background:white;border:1px solid #e5eaf3;border-radius:15px;padding:17px;margin-bottom:13px}h2{font-size:20px;margin:0 0 12px}h3{margin:0 0 8px}.muted,.small{color:#647089}.small{font-size:13px}.hidden{display:none!important}.soft{background:#edf2ff;color:#2457c5}.primary{background:#2457c5;color:white}.word{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #e5eaf3}.meaning{font-size:14px;color:#647089}input,select{width:100%;padding:12px;border:1px solid #d5ddeb;border-radius:10px;margin:7px 0 12px;font:inherit}.lesson{background:#f1f5ff;padding:13px;border-radius:10px;margin:10px 0}.option{display:block;width:100%;text-align:left;margin:8px 0;background:white;border:1px solid #d5ddeb}.good{color:#16834b;font-weight:650}.bad{color:#b42318;font-weight:650}.certificate{background:#fffdf6;border:5px double #c49b39;padding:20px;text-align:center}.certificate h2{font:26px Georgia;color:#173b91}.student{font: bold 25px Georgia;border-bottom:1px solid #bda45f;display:inline-block;padding:6px 20px}footer{text-align:center;color:#647089;padding:20px;font-size:12px}@media print{header,.tabs,.no-print,footer{display:none!important}body{background:white}.section{display:none!important}#account{display:block!important}.certificate{margin:20px}}
+</style></head><body>
+<header><h1>MRH English Guide</h1><p>Learn English step by step — words, grammar, speaking and tests.</p></header><main>
+<nav class="tabs"><button class="tab active" data-tab="home">Home</button><button class="tab" data-tab="words">Vocabulary</button><button class="tab" data-tab="lessons">Class lessons</button><button class="tab" data-tab="speak">Speaking</button><button class="tab" data-tab="quiz">Test</button><button class="tab" data-tab="account">Student</button></nav>
+<section id="home" class="section"><div class="panel"><h2>Welcome to your learning room!</h2><p>Build your English skills with Bengali meanings, simple lessons, pronunciation and practice tests.</p><button class="primary" onclick="show('words')">Start learning</button></div><div class="card"><h3>Your learning path</h3><p>1. Learn useful words<br>2. Study a grammar lesson<br>3. Speak aloud and listen<br>4. Take the test and print your certificate</p></div></section>
+<section id="words" class="section hidden"><div class="panel"><h2>English vocabulary</h2><p class="small">Starter word collection with Bengali meanings. Tap 🔊 to hear a word.</p><input id="search" placeholder="Search words..." oninput="drawWords()"><div id="wordList"></div></div></section>
+<section id="lessons" class="section hidden"><div class="panel"><h2>Class-wise lessons</h2><select id="level" onchange="drawLesson()"><option value="3">Class 3–5: Beginner</option><option value="6">Class 6–8: Elementary</option><option value="9">Class 9–10: Secondary</option><option value="11">Class 11–12: Higher Secondary</option></select><div id="lesson"></div></div></section>
+<section id="speak" class="section hidden"><div class="panel"><h2>Speaking practice</h2><p>Listen to a sentence and practise saying it aloud.</p><div class="lesson"><h3 id="prompt">Good morning. How are you today?</h3><button class="soft" onclick="say()">🔊 Listen</button></div><button class="primary" onclick="recognize()">🎙️ Try speaking</button> <button class="soft" onclick="nextPrompt()">Next sentence</button><p id="heard" class="small">Your spoken words will appear here if speech recognition is supported.</p></div></section>
+<section id="quiz" class="section hidden"><div class="panel"><h2>English practice test</h2><p id="progress" class="small"></p><h3 id="question"></h3><div id="options"></div><p id="feedback"></p><button id="next" class="primary" onclick="nextQ()" disabled>Next question</button></div></section>
+<section id="account" class="section hidden"><div class="panel"><h2>Student profile</h2><p class="small">This demo saves your display name on this device only. It does not create a secure online account.</p><label>Your name</label><input id="studentName" placeholder="Enter your name"><button class="primary no-print" onclick="saveName()">Save name</button><p id="saved" class="good"></p></div><div class="panel"><h2>Your certificate</h2><div class="certificate"><h2>Certificate of Practice</h2><p>This is proudly presented to</p><div id="certName" class="student">English Learner</div><p>for completing the MRH English Guide practice test.</p><p id="certScore">Test score: Not completed yet</p><p>Keep learning and keep improving!</p><p>MRH English Guide</p></div><button class="primary no-print" style="margin-top:12px" onclick="window.print()">Print / Save certificate</button></div></section>
+<footer>MRH English Guide • Learn a little every day</footer></main>
+<script>
+const tabs=document.querySelectorAll('.tab');function show(id){document.querySelectorAll('.section').forEach(s=>s.classList.toggle('hidden',s.id!==id));tabs.forEach(t=>t.classList.toggle('active',t.dataset.tab===id))}tabs.forEach(t=>t.onclick=()=>show(t.dataset.tab));
+const words=[['Ability','ক্ষমতা'],['Accept','গ্রহণ করা'],['Achieve','অর্জন করা'],['Active','সক্রিয়'],['Advice','পরামর্শ'],['Afraid','ভীত'],['Agree','একমত হওয়া'],['Always','সবসময়'],['Amazing','অসাধারণ'],['Angry','রাগান্বিত'],['Answer','উত্তর'],['Beautiful','সুন্দর'],['Believe','বিশ্বাস করা'],['Brave','সাহসী'],['Careful','সতর্ক'],['Change','পরিবর্তন'],['Clever','বুদ্ধিমান'],['Curious','কৌতূহলী'],['Decide','সিদ্ধান্ত নেওয়া'],['Delicious','সুস্বাদু'],['Difficult','কঠিন'],['Easy','সহজ'],['Education','শিক্ষা'],['Enjoy','উপভোগ করা'],['Environment','পরিবেশ'],['Famous','বিখ্যাত'],['Friendly','বন্ধুত্বপূর্ণ'],['Honest','সৎ'],['Hope','আশা'],['Improve','উন্নতি করা'],['Important','গুরুত্বপূর্ণ'],['Knowledge','জ্ঞান'],['Kind','দয়ালু'],['Learn','শেখা'],['Necessary','প্রয়োজনীয়'],['Opportunity','সুযোগ'],['Patient','ধৈর্যশীল'],['Peace','শান্তি'],['Polite','ভদ্র'],['Practice','অনুশীলন'],['Prepare','প্রস্তুত করা'],['Question','প্রশ্ন'],['Respect','সম্মান'],['Responsible','দায়িত্বশীল'],['Safe','নিরাপদ'],['Success','সাফল্য'],['Support','সহায়তা'],['Together','একসাথে'],['Useful','উপকারী'],['Victory','বিজয়'],['Wisdom','প্রজ্ঞা'],['Wonderful','চমৎকার'],['Yesterday','গতকাল'],['Young','তরুণ']];
+function sayText(t){if(!('speechSynthesis'in window)){alert('Speech playback is not supported in this browser.');return}let u=new SpeechSynthesisUtterance(t);u.lang='en-US';speechSynthesis.speak(u)}
+function drawWords(){let q=(document.getElementById('search').value||'').toLowerCase();document.getElementById('wordList').innerHTML=words.filter(w=>(w[0]+' '+w[1]).toLowerCase().includes(q)).map(w=>`<div class="word"><div><b>${w[0]}</b><div class="meaning">${w[1]}</div></div><button class="soft" onclick="sayText('${w[0]}')">🔊</button></div>`).join('')||'<p>No matching words.</p>'}drawWords();
+const lessons={3:['Nouns and simple sentences','A noun names a person, place, animal or thing. Examples: Rina, school, cat, book. Sentence: This is a book. I play every day.'],6:['Am, is and are','Use am with I: I am happy. Use is with he, she, it or one name: She is kind. Use are with you, we, they and plural nouns: They are ready.'],9:['Simple present tense','Use the simple present for habits and facts. Examples: I read every day. She reads every day. Add s or es to the verb with he, she or it.'],11:['Present perfect tense','Use has or have + past participle for an action connected to the present. Examples: I have finished my work. She has written a letter.']};
+function drawLesson(){let x=lessons[document.getElementById('level').value];document.getElementById('lesson').innerHTML='<div class="lesson"><h3>'+x[0]+'</h3><p>'+x[1]+'</p></div><p class="small">Read the examples aloud and write two examples of your own.</p>'}drawLesson();
+const prompts=['Good morning. How are you today?','My name is ______.','I want to improve my English.','Could you please help me?','Thank you very much.'];let pi=0;function say(){sayText(document.getElementById('prompt').textContent)}function nextPrompt(){pi=(pi+1)%prompts.length;document.getElementById('prompt').textContent=prompts[pi];document.getElementById('heard').textContent=''}
+function recognize(){let SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){document.getElementById('heard').textContent='Speech recognition is not available in this browser. Tap Listen and practise aloud.';return}let r=new SR();r.lang='en-IN';r.onresult=e=>document.getElementById('heard').textContent='I heard: '+e.results[0][0].transcript;r.onerror=e=>document.getElementById('heard').textContent='Microphone error: '+e.error;r.start()}
+const qs=[['I ___ a student.',['is','am','are'],'am'],['She ___ my friend.',['are','am','is'],'is'],['They ___ happy.',['is','are','am'],'are'],['Rahim ___ a good boy.',['are','is','am'],'is'],['You ___ welcome.',['am','is','are'],'are']];let qi=0,score=0,answered=false;
+function drawQ(){answered=false;document.getElementById('progress').textContent='Question '+(qi+1)+' of '+qs.length;document.getElementById('question').textContent=qs[qi][0];document.getElementById('feedback').textContent='';document.getElementById('next').disabled=true;document.getElementById('next').textContent=qi===qs.length-1?'Finish test':'Next question';document.getElementById('options').innerHTML='';qs[qi][1].forEach(a=>{let b=document.createElement('button');b.className='option';b.textContent=a;b.onclick=()=>answer(a);document.getElementById('options').appendChild(b)})}
+function answer(a){if(answered)return;answered=true;let ok=a===qs[qi][2];if(ok)score++;let f=document.getElementById('feedback');f.textContent=ok?'Correct! Well done.':'Correct answer: '+qs[qi][2];f.className=ok?'good':'bad';document.querySelectorAll('.option').forEach(b=>b.disabled=true);document.getElementById('next').disabled=false}
+function nextQ(){if(qi<qs.length-1){qi++;drawQ()}else{document.getElementById('question').textContent='Test completed!';document.getElementById('options').innerHTML='';document.getElementById('feedback').textContent='Your score: '+score+' out of '+qs.length;document.getElementById('next').textContent='Try again';document.getElementById('next').onclick=()=>{qi=0;score=0;document.getElementById('next').onclick=nextQ;drawQ()};document.getElementById('certScore').textContent='Test score: '+score+' out of '+qs.length}}drawQ();
+function saveName(){let n=document.getElementById('studentName').value.trim();if(!n){document.getElementById('saved').textContent='Please enter your name.';return}try{localStorage.setItem('mrhName',n)}catch(e){}document.getElementById('certName').textContent=n;document.getElementById('saved').textContent='Name saved on this device.'}try{let n=localStorage.getItem('mrhName');if(n){document.getElementById('studentName').value=n;document.getElementById('certName').textContent=n}}catch(e){}
+</script></body></html>
